@@ -19,11 +19,7 @@ import {
   Mail,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  saveInquiryToFirestore,
-  type InquiryData,
-} from "@/lib/firebase"
-import { createEnterpriseGoogleForm } from "@/lib/google-forms"
+// No firebase imports needed
 
 interface GoogleFormsInquiryModalProps {
   isOpen: boolean
@@ -69,36 +65,33 @@ export function GoogleFormsInquiryModal({
     setSubmitSuccess(null)
 
     try {
-      let createdFormUrl = ""
-      let createdResponderUri = ""
-      let createdFormId = ""
+      const response = await fetch("https://formsubmit.co/ajax/thesactterid@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+          organization: orgName.trim(),
+          inquiryType: inquiryType,
+          message: message.trim(),
+          _subject: `New Inquiry from ${orgName.trim()}`
+        })
+      });
 
-      // 1. Save inquiry to Firestore database directly
-      const newInquiry: Omit<InquiryData, "id"> = {
-        userId: "anonymous",
-        userEmail: email.trim(),
-        userName: "Anonymous User",
-        orgName: orgName.trim(),
-        inquiryType,
-        message: message.trim(),
-        status: "submitted",
-        googleFormId: createdFormId || undefined,
-        googleFormUrl: createdFormUrl || undefined,
-        createdAt: new Date().toISOString(),
+      if (response.ok) {
+        setSubmitSuccess({
+          firestoreId: "SENT-" + Math.floor(Math.random() * 10000),
+        })
+
+        // Refresh list
+        setEmail("")
+        setOrgName("")
+        setMessage("")
+      } else {
+        throw new Error("Form submission failed")
       }
-
-      const savedDoc = await saveInquiryToFirestore(newInquiry)
-
-      setSubmitSuccess({
-        firestoreId: savedDoc?.id,
-        googleFormUrl: createdFormUrl,
-        responderUri: createdResponderUri,
-      })
-
-      // Refresh list
-      setEmail("")
-      setOrgName("")
-      setMessage("")
     } catch (err) {
       console.error("Error submitting inquiry:", err)
       alert("An error occurred while saving your inquiry. Please try again.")
