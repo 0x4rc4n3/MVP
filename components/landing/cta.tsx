@@ -12,11 +12,11 @@ export function CTA() {
   return (
     <>
       {/* 
-        The final section body occupies exactly 90vh (no scroll down arrow container below it).
-        We center the CTA card within this 90vh window.
+        The final section body occupies exactly min-h-[calc(100vh-64px)].
+        We center the CTA card within this window.
       */}
-      <section id="roadmap" className="bg-background flex flex-col justify-center scroll-mt-[64px] h-[90vh] min-h-[90vh]">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 w-full py-2 my-auto">
+      <section id="roadmap" className="bg-background flex flex-col justify-center scroll-mt-[64px] min-h-[calc(100vh-64px)]">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 w-full flex-1 flex flex-col justify-center py-12">
           <div className="relative overflow-hidden rounded-2xl border border-primary/40 bg-card p-8 sm:p-12 md:p-16 text-center text-foreground shadow-[0_0_50px_rgba(16,185,129,0.15)]">
             {/* Subtle grid accent */}
             <div

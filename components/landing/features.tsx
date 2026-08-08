@@ -65,9 +65,9 @@ export function Features() {
   }
 
   return (
-    <section id="tech" className="bg-background flex flex-col justify-between scroll-mt-[64px]">
-      {/* 90vh Body container - fully centered content */}
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 w-full flex flex-col justify-center space-y-6 h-[90vh] min-h-[90vh] py-2">
+    <section id="tech" className="bg-background flex flex-col justify-between scroll-mt-[64px] min-h-[calc(100vh-64px)]">
+      {/* Body container - fully centered content */}
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 w-full flex-1 flex flex-col justify-center space-y-6 py-12">
         {/* Section header */}
         <div className="text-center max-w-3xl mx-auto">
           <p className="font-mono text-sm uppercase tracking-widest text-primary font-semibold flex items-center justify-center gap-2">
@@ -103,8 +103,8 @@ export function Features() {
         </div>
       </div>
 
-      {/* 5vh Bottom dynamic scroll button container */}
-      <div className="h-[5vh] min-h-[5vh] flex items-center justify-center relative z-20">
+      {/* Bottom dynamic scroll button container */}
+      <div className="h-16 shrink-0 flex items-center justify-center relative z-20">
         <a
           href="#integration"
           onClick={handleClick}

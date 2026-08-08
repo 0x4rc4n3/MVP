@@ -32,7 +32,7 @@ export function Hero() {
 
   return (
     <>
-      <section id="top" className="relative overflow-hidden bg-background flex flex-col justify-between scroll-mt-[64px]">
+      <section id="top" className="relative overflow-hidden bg-background flex flex-col justify-between scroll-mt-[64px] min-h-[calc(100vh-64px)]">
         {/* Fine, subtle tech grid dot matrix backdrop */}
         <div
           aria-hidden="true"
@@ -76,8 +76,8 @@ export function Hero() {
           <circle cx="950" cy="550" r="10" fill="url(#dotGlow)" className="animate-pulse" style={{ animationDuration: "5.5s" }} />
         </svg>
 
-        {/* 90vh Body container - fully centered content */}
-        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 w-full text-center flex flex-col items-center justify-center space-y-6 h-[90vh] min-h-[90vh]">
+        {/* Body container - fully centered content */}
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 w-full text-center flex-1 flex flex-col items-center justify-center space-y-6 py-12">
           <div>
             <a
               href="#problem"
@@ -127,8 +127,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* 5vh Bottom dynamic scroll button container */}
-        <div className="h-[5vh] min-h-[5vh] flex items-center justify-center relative z-20">
+        {/* Bottom dynamic scroll button container */}
+        <div className="h-16 shrink-0 flex items-center justify-center relative z-20">
           <a
             href="#problem"
             onClick={handleClick}
