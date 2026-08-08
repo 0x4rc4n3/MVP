@@ -1,0 +1,8 @@
+{
+  "name": "ScatterID",
+  "description": "Decentralized identity platform engineered to protect enterprise infrastructure from quantum decryption.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

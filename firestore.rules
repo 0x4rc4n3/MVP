@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidInquiry(data) {
+      return data.keys().hasAll(['userId', 'userEmail', 'orgName', 'inquiryType', 'message', 'status', 'createdAt'])
+        && data.userId is string
+        && data.userEmail is string
+        && data.orgName is string && data.orgName.size() <= 100
+        && data.inquiryType in ['pilot_cohort', 'crypto_audit', 'cofounder', 'general']
+        && data.message is string && data.message.size() <= 2000
+        && data.status in ['submitted', 'in_review', 'connected']
+        && data.createdAt is string;
+    }
+
+    match /inquiries/{inquiryId} {
+      // Users can read their own submitted inquiries
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      // Users can create an inquiry
+      allow create: if isValidInquiry(request.resource.data);
+      // Users can update their own inquiry
+      allow update: if isSignedIn()
+        && resource.data.userId == request.auth.uid
+        && request.resource.data.userId == request.auth.uid
+        && isValidInquiry(request.resource.data);
+      // Delete disabled
+      allow delete: if false;
+    }
+
+    match /user_form_configs/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+  }
+}

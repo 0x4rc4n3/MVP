@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Enterprise pilot or technical inquiry submitted by an authenticated user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Inquiry document ID" },
+        "userId": { "type": "string", "description": "UID of the submitter" },
+        "userEmail": { "type": "string", "description": "Email of the submitter" },
+        "userName": { "type": "string", "description": "Display name of the submitter" },
+        "orgName": { "type": "string", "maxLength": 100, "description": "Organization or node handle" },
+        "inquiryType": { "type": "string", "enum": ["pilot_cohort", "crypto_audit", "cofounder", "general"], "description": "Type of inquiry" },
+        "message": { "type": "string", "maxLength": 2000, "description": "Inquiry body text" },
+        "status": { "type": "string", "enum": ["submitted", "in_review", "connected"], "description": "Status of inquiry" },
+        "googleFormId": { "type": "string", "description": "Linked Google Form ID if created" },
+        "googleFormUrl": { "type": "string", "description": "Linked Google Form view/edit URL" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when inquiry was created" }
+      },
+      "required": ["userId", "userEmail", "orgName", "inquiryType", "message", "status", "createdAt"]
+    },
+    "UserFormConfig": {
+      "title": "UserFormConfig",
+      "description": "User Google Form integration preferences and active form ID.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "formId": { "type": "string" },
+        "formTitle": { "type": "string" },
+        "formUrl": { "type": "string" },
+        "responderUri": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "formId", "formTitle", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": { "$ref": "#/entities/Inquiry" },
+      "description": "Collection of user enterprise inquiries and pilot applications"
+    },
+    "/user_form_configs/{userId}": {
+      "schema": { "$ref": "#/entities/UserFormConfig" },
+      "description": "Google Form settings and links per user"
+    }
+  }
+}
