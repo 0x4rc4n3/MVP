@@ -76,7 +76,7 @@ export function QuantumSandbox() {
         </div>
 
         {/* Navigation */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 border-b border-border/60 pb-6">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 pb-6">
           {steps.map((s) => {
             const Icon = s.icon
             const isActive = currentStep === s.num

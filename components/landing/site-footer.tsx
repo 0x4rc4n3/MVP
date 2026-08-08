@@ -40,7 +40,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-background border-t border-border">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 py-12 space-y-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-border/60">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6">
           <Logo iconSize="md" />
           <p className="text-xs font-mono text-muted-foreground">
             Post-Quantum Decentralized Identity Infrastructure
