@@ -46,7 +46,7 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
           </p>
         </div>
 
-        <form action="https://formsubmit.co/thesactterid@gmail.com" method="POST" className="mt-5 space-y-4">
+        <form action="https://formsubmit.co/thescatterid@gmail.com" method="POST" className="mt-5 space-y-4">
           <input type="hidden" name="_subject" value={`Sales Inquiry from ${orgName}`} />
           <input type="hidden" name="_captcha" value="false" />
 
