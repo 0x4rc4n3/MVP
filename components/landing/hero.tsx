@@ -4,11 +4,9 @@ import { useState, useEffect } from "react"
 import { ArrowRight, Mail, ChevronDown, UserPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SalesModal } from "./sales-modal"
-import { JoinModal } from "./join-modal"
 
 export function Hero() {
   const [salesOpen, setSalesOpen] = useState(false)
-  const [joinOpen, setJoinOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -124,17 +122,7 @@ export function Hero() {
               className="h-10 px-6 font-semibold text-sm sm:text-base border-primary/40 bg-card/60 hover:bg-primary/10 hover:border-primary text-foreground transition-all rounded-lg"
             >
               <Mail className="h-4 w-4 mr-2 text-primary" />
-              Sales & Pilot
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => setJoinOpen(true)}
-              className="h-10 px-6 font-semibold text-sm sm:text-base border-primary/40 bg-card/60 hover:bg-primary/10 hover:border-primary text-foreground transition-all rounded-lg"
-            >
-              <UserPlus className="h-4 w-4 mr-2 text-primary" />
-              Join Team
+              Book Now
             </Button>
           </div>
         </div>
@@ -153,7 +141,6 @@ export function Hero() {
       </section>
 
       <SalesModal isOpen={salesOpen} onClose={() => setSalesOpen(false)} />
-      <JoinModal isOpen={joinOpen} onClose={() => setJoinOpen(false)} />
     </>
   )
 }

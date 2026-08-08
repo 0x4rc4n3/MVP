@@ -78,10 +78,10 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
         <div className="space-y-1 pr-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 text-xs font-mono font-semibold text-primary">
             <Briefcase className="h-3.5 w-3.5" />
-            Enterprise Solutions
+            Get in Touch
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Sales & Partnerships
+            Contact Us
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground">
             Get in touch for enterprise pilots, cryptographic audits, or B2B integration.
@@ -170,7 +170,7 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
               ) : (
                 <span className="flex items-center gap-2">
                   <Send className="h-4 w-4" />
-                  Send Inquiry
+                  Send Message
                 </span>
               )}
             </Button>
