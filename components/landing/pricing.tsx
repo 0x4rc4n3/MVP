@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Check, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { GoogleFormsInquiryModal } from "./google-forms-inquiry-modal"
+import { SalesModal } from "./sales-modal"
 
 const tiers = [
   {
@@ -191,11 +191,9 @@ export function Pricing() {
         </div>
       </section>
 
-      <GoogleFormsInquiryModal
+      <SalesModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        formType="sales"
-        defaultInquiryType={inquiryType}
       />
     </>
   )

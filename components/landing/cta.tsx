@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Mail, UserPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { GoogleFormsInquiryModal } from "./google-forms-inquiry-modal"
+import { SalesModal } from "./sales-modal"
 
 export function CTA() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -59,10 +59,9 @@ export function CTA() {
         </div>
       </section>
 
-      <GoogleFormsInquiryModal
+      <SalesModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        formType="sales"
       />
     </>
   )

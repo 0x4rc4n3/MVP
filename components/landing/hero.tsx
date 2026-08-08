@@ -1,12 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ArrowRight, Mail, ChevronDown } from "lucide-react"
+import { ArrowRight, Mail, ChevronDown, UserPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { GoogleFormsInquiryModal } from "./google-forms-inquiry-modal"
+import { SalesModal } from "./sales-modal"
+import { JoinModal } from "./join-modal"
 
 export function Hero() {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [salesOpen, setSalesOpen] = useState(false)
+  const [joinOpen, setJoinOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -107,7 +109,7 @@ export function Hero() {
             Post-quantum identity verification powered by NIST ML-DSA-65 signatures, Shamir threshold secret-sharing, and distributed ledgers.
           </p>
 
-          <div className="pt-2 flex flex-row items-center justify-center gap-3 w-full">
+          <div className="pt-2 flex flex-row flex-wrap items-center justify-center gap-3 w-full">
             <a
               href="/demo"
               className="group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padding whitespace-nowrap outline-none select-none active:translate-y-px h-10 px-10 font-semibold text-sm sm:text-base bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all rounded-lg text-center"
@@ -118,11 +120,21 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              onClick={() => setModalOpen(true)}
+              onClick={() => setSalesOpen(true)}
               className="h-10 px-6 font-semibold text-sm sm:text-base border-primary/40 bg-card/60 hover:bg-primary/10 hover:border-primary text-foreground transition-all rounded-lg"
             >
               <Mail className="h-4 w-4 mr-2 text-primary" />
-              Contact Us
+              Sales & Pilot
+            </Button>
+
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => setJoinOpen(true)}
+              className="h-10 px-6 font-semibold text-sm sm:text-base border-primary/40 bg-card/60 hover:bg-primary/10 hover:border-primary text-foreground transition-all rounded-lg"
+            >
+              <UserPlus className="h-4 w-4 mr-2 text-primary" />
+              Join Team
             </Button>
           </div>
         </div>
@@ -140,11 +152,8 @@ export function Hero() {
         </div>
       </section>
 
-      <GoogleFormsInquiryModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        formType="sales"
-      />
+      <SalesModal isOpen={salesOpen} onClose={() => setSalesOpen(false)} />
+      <JoinModal isOpen={joinOpen} onClose={() => setJoinOpen(false)} />
     </>
   )
 }

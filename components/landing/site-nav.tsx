@@ -5,7 +5,7 @@ import { Menu, X, Shield, FileText, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Logo } from "./logo"
 import { GithubIcon } from "@/components/ui/github-icon"
-import { GoogleFormsInquiryModal } from "./google-forms-inquiry-modal"
+import { JoinModal } from "./join-modal"
 import { auth, initAuth } from "@/lib/firebase"
 
 const links = [
@@ -13,12 +13,12 @@ const links = [
   { label: "Technology", href: "#tech" },
   { label: "Integration", href: "#integration" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Join Us", href: "#roadmap" },
+  { label: "Join Us", href: "#join" },
 ]
 
 export function SiteNav() {
   const [open, setOpen] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [joinModalOpen, setJoinModalOpen] = useState(false)
   const [user, setUser] = useState(auth.currentUser)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [activeSection, setActiveSection] = useState("")
@@ -71,6 +71,13 @@ export function SiteNav() {
   }, [])
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "#join") {
+      e.preventDefault()
+      setOpen(false)
+      setJoinModalOpen(true)
+      return
+    }
+
     setOpen(false)
     if (href.startsWith("#")) {
       if (typeof window !== "undefined" && window.location.pathname !== "/") {
@@ -197,10 +204,9 @@ export function SiteNav() {
         )}
       </header>
 
-      <GoogleFormsInquiryModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        formType="join"
+      <JoinModal
+        isOpen={joinModalOpen}
+        onClose={() => setJoinModalOpen(false)}
       />
     </>
   )
