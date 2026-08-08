@@ -60,7 +60,7 @@ export function QuantumSandbox() {
   }
 
   return (
-    <section id="sandbox" className="bg-background pt-10 pb-24 sm:pt-12 sm:pb-32 border-b border-border">
+    <section id="sandbox" className="bg-background pt-10 pb-24 sm:pt-12 sm:pb-32">
       <div className="mx-auto max-w-4xl px-6 sm:px-10 lg:px-16 space-y-12">
         <div className="text-center max-w-2xl mx-auto">
           <p className="font-mono text-xs uppercase tracking-widest text-primary font-semibold inline-flex items-center gap-2">
