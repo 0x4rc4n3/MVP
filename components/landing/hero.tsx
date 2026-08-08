@@ -126,18 +126,6 @@ export function Hero() {
             </Button>
           </div>
         </div>
-
-        {/* Bottom dynamic scroll button container */}
-        <div className="h-16 shrink-0 flex items-center justify-center relative z-20">
-          <a
-            href="#problem"
-            onClick={handleClick}
-            className="text-muted-foreground/50 hover:text-primary transition-all duration-300 p-2 rounded-full hover:bg-muted/10 flex items-center justify-center -translate-y-2"
-            aria-label={isScrolled ? "Scroll to top" : "Scroll to next section"}
-          >
-            <ChevronDown className={`h-6 w-6 transition-transform duration-500 ${isScrolled ? "rotate-180 text-primary" : "animate-bounce"}`} />
-          </a>
-        </div>
       </section>
 
       <SalesModal isOpen={salesOpen} onClose={() => setSalesOpen(false)} />

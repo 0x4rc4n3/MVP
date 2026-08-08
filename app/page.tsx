@@ -6,11 +6,13 @@ import { DeveloperIntegration } from "@/components/landing/code-sample"
 import { Pricing } from "@/components/landing/pricing"
 import { CTA } from "@/components/landing/cta"
 import { SiteFooter } from "@/components/landing/site-footer"
+import { GlobalScrollArrows } from "@/components/landing/global-scroll-arrows"
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-clip">
       <SiteNav />
+      <GlobalScrollArrows />
       <main>
         <Hero />
         <ThreatModel />
