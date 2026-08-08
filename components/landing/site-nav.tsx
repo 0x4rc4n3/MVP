@@ -200,6 +200,7 @@ export function SiteNav() {
       <GoogleFormsInquiryModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
+        formType="join"
       />
     </>
   )

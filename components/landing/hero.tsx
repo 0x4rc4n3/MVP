@@ -143,6 +143,7 @@ export function Hero() {
       <GoogleFormsInquiryModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
+        formType="sales"
       />
     </>
   )

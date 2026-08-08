@@ -194,6 +194,7 @@ export function Pricing() {
       <GoogleFormsInquiryModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
+        formType="sales"
         defaultInquiryType={inquiryType}
       />
     </>

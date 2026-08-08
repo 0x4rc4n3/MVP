@@ -62,7 +62,7 @@ export function CTA() {
       <GoogleFormsInquiryModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        defaultInquiryType={inquiryType}
+        formType="sales"
       />
     </>
   )
