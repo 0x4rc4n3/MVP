@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Mail, UserPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { SalesModal } from "./sales-modal"
+import { JoinModal } from "./join-modal"
 
 export function CTA() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -59,7 +59,7 @@ export function CTA() {
         </div>
       </section>
 
-      <SalesModal
+      <JoinModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
       />

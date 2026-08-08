@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Send, CheckCircle2, RefreshCw, X, Briefcase } from "lucide-react"
+import { Send, X, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
@@ -10,63 +10,21 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
   const [inquiryType, setInquiryType] = useState("pilot_cohort")
   const [message, setMessage] = useState("")
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
-
   useEffect(() => {
     if (isOpen) {
       setInquiryType("pilot_cohort")
-      setSubmitSuccess(false)
     }
   }, [isOpen])
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!message.trim() || !email.trim() || !orgName.trim()) {
-      alert("Please fill in required fields.")
-      return
-    }
-
-    setIsSubmitting(true)
-    setSubmitSuccess(false)
-
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/thesactterid@gmail.com", {
-        method: "POST",
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          organization: orgName.trim(),
-          type: inquiryType,
-          message: message.trim(),
-          _subject: `Sales Inquiry from ${orgName.trim()}`,
-        })
-      });
-
-      if (response.ok) {
-        setSubmitSuccess(true)
-        setEmail("")
-        setOrgName("")
-        setMessage("")
-      } else {
-        throw new Error("Form submission failed")
-      }
-    } catch (err) {
-      console.error("Error:", err)
-      alert("An error occurred while sending your message. Please try again.")
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
 
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-2xl">
         <button
           onClick={onClose}
@@ -88,18 +46,9 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-5 space-y-4">
-          {submitSuccess && (
-            <div className="p-4 rounded-xl border border-primary/40 bg-primary/10 space-y-2 animate-fade-in font-mono text-xs">
-              <div className="flex items-center gap-2 text-primary font-bold">
-                <CheckCircle2 className="h-4 w-4" />
-                Message Sent Successfully!
-              </div>
-              <div className="text-muted-foreground">
-                We will get back to you shortly.
-              </div>
-            </div>
-          )}
+        <form action="https://formsubmit.co/thesactterid@gmail.com" method="POST" className="mt-5 space-y-4">
+          <input type="hidden" name="_subject" value={`Sales Inquiry from ${orgName}`} />
+          <input type="hidden" name="_captcha" value="false" />
 
           <div>
             <label className="block font-mono text-xs text-muted-foreground mb-1">
@@ -107,6 +56,7 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
             </label>
             <input
               type="email"
+              name="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -121,6 +71,7 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
               </label>
               <input
                 type="text"
+                name="organization"
                 required
                 value={orgName}
                 onChange={(e) => setOrgName(e.target.value)}
@@ -132,6 +83,7 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
                 Inquiry Type *
               </label>
               <select
+                name="type"
                 value={inquiryType}
                 onChange={(e) => setInquiryType(e.target.value)}
                 className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary font-mono"
@@ -148,6 +100,7 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
               Message *
             </label>
             <textarea
+              name="message"
               required
               rows={4}
               value={message}
@@ -159,20 +112,12 @@ export function SalesModal({ isOpen, onClose }: { isOpen: boolean, onClose: () =
           <div className="pt-3">
             <Button
               type="submit"
-              disabled={isSubmitting}
               className="w-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 shadow-[0_0_20px_rgba(16,185,129,0.25)]"
             >
-              {isSubmitting ? (
-                <span className="flex items-center gap-2">
-                  <RefreshCw className="h-4 w-4 animate-spin" />
-                  Sending...
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <Send className="h-4 w-4" />
-                  Send Message
-                </span>
-              )}
+              <span className="flex items-center gap-2">
+                <Send className="h-4 w-4" />
+                Send Message
+              </span>
             </Button>
           </div>
         </form>
