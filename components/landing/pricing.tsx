@@ -8,55 +8,58 @@ import { SalesModal } from "./sales-modal"
 const tiers = [
   {
     id: "open-source",
-    name: "Open Source",
+    name: "Free / Open Source",
     price: "Free",
     cadence: " forever",
     blurb: "Evaluate post-quantum cryptography on your own local nodes.",
     features: [
       "B2B SDK Access",
       "Local containerized Fabric",
-      "Basic PQC signing",
+      "Post-quantum cryptographic resilience and stress-testing harness",
       "Community Support",
     ],
     cta: "View GitHub",
     inquiryType: "general",
     highlighted: false,
+    badge: null,
     isModal: false,
     href: "https://github.com",
   },
   {
-    id: "per-verification",
-    name: "Pay-As-You-Go",
-    price: "Volume",
-    cadence: " / verification",
-    blurb: "For universities and early-stage fintechs starting out.",
+    id: "enterprise-pilot",
+    name: "Enterprise Pilot Partner",
+    price: "Custom",
+    cadence: " / cohort",
+    blurb: "Early access for universities and fintechs to pilot standardized integrations.",
     features: [
       "Verification API",
       "Hosted PQC signing",
-      "Reconstruction-less verification",
+      "Standardized SAML / OIDC dual-stack bridge integration plugin",
       "Email Support",
-    ],
-    cta: "Contact Us",
-    inquiryType: "general",
-    highlighted: false,
-    isModal: true,
-    href: undefined,
-  },
-  {
-    id: "enterprise",
-    name: "Enterprise Pilot",
-    price: "Custom",
-    cadence: " / month",
-    blurb: "Dedicated infrastructure for high-volume KYC providers.",
-    features: [
-      "Dedicated Fabric nodes",
-      "24/7 Cryptographic SLA",
-      "Custom Sharding (k/n)",
-      "Priority Integration",
     ],
     cta: "Start Pilot",
     inquiryType: "pilot_cohort",
     highlighted: true,
+    badge: "Pilot Cohort",
+    isModal: true,
+    href: undefined,
+  },
+  {
+    id: "production-stack",
+    name: "Full Production Stack",
+    price: "Volume",
+    cadence: " / month",
+    blurb: "Dedicated infrastructure for high-volume KYC providers.",
+    features: [
+      "Dedicated Fabric nodes",
+      "Dedicated Infrastructure Monitoring & Enterprise Support",
+      "Custom Sharding (k/n)",
+      "Priority Integration",
+    ],
+    cta: "Contact Sales",
+    inquiryType: "general",
+    highlighted: false,
+    badge: null,
     isModal: true,
     href: undefined,
   }
@@ -123,9 +126,9 @@ export function Pricing() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-bold text-foreground">{t.name}</h3>
-                    {t.highlighted && (
+                    {t.highlighted && t.badge && (
                       <span className="rounded-full bg-primary/10 border border-primary/30 px-2.5 py-0.5 text-xs font-mono font-semibold text-primary">
-                        Pilot Cohort
+                        {t.badge}
                       </span>
                     )}
                   </div>
