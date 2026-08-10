@@ -2,12 +2,28 @@
 const sidebar = document.getElementById('main-sidebar');
 const mainContent = document.getElementById('main-content');
 const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
 if (sidebar && sidebarToggleBtn) {
   sidebarToggleBtn.addEventListener('click', () => {
     sidebar.classList.toggle('collapsed');
     if (mainContent) mainContent.classList.toggle('expanded');
     sidebarToggleBtn.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀';
+  });
+}
+
+// Mobile Hamburger Menu Toggle
+if (sidebar && mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle('mobile-open');
+  });
+
+  // Close mobile sidebar when clicking on main body content area
+  document.addEventListener('click', (e) => {
+    if (sidebar.classList.contains('mobile-open') && !sidebar.contains(e.target) && e.target !== mobileMenuBtn) {
+      sidebar.classList.remove('mobile-open');
+    }
   });
 }
 
@@ -41,6 +57,11 @@ const pageTitle = document.getElementById('page-title');
 navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
+    
+    // Close sidebar on mobile upon tab selection
+    if (sidebar && sidebar.classList.contains('mobile-open')) {
+      sidebar.classList.remove('mobile-open');
+    }
     
     // Set active link
     navLinks.forEach(l => l.classList.remove('active'));
