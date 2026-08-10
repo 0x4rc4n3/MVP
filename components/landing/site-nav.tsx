@@ -142,7 +142,7 @@ export function SiteNav() {
 
           <div className="hidden items-center gap-3 md:flex">
             <a
-              href="/demo"
+              href="https://demo.scatterid.tech"
               className="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-[0.8rem] font-semibold whitespace-nowrap transition-all outline-none select-none active:translate-y-px bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_15px_rgba(16,185,129,0.2)] h-7 px-6"
             >
               Demo
@@ -183,7 +183,7 @@ export function SiteNav() {
               })}
               <div className="mt-3 flex flex-col gap-2 pt-2 border-t border-border">
                 <a
-                  href="/demo"
+                  href="https://demo.scatterid.tech"
                   onClick={() => setOpen(false)}
                   className="w-full bg-primary text-primary-foreground font-semibold justify-center inline-flex shrink-0 items-center rounded-lg border border-transparent bg-clip-padding text-sm whitespace-nowrap transition-all outline-none select-none active:translate-y-px hover:bg-primary/90 h-8"
                 >

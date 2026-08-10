@@ -109,7 +109,7 @@ export function Hero() {
 
           <div className="pt-2 flex flex-row flex-wrap items-center justify-center gap-3 w-full">
             <a
-              href="/demo"
+              href="https://demo.scatterid.tech"
               className="group/button inline-flex shrink-0 items-center justify-center border border-transparent bg-clip-padding whitespace-nowrap outline-none select-none active:translate-y-px h-10 px-10 font-semibold text-sm sm:text-base bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all rounded-lg text-center"
             >
               Demo
