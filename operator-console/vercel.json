@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "buildCommand": "mkdir -p dist && cp -r public/* dist",
+  "outputDirectory": "dist",
+  "installCommand": "echo 'Skipping dependency installation for static demo mode'"
+}

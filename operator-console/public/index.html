@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScatterID Enterprise Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Roboto:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="demo.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <!-- Sidebar Navigation (Collapsible Horizontal) -->
+  <nav class="sidebar" id="main-sidebar">
+    <div class="logo">
+      <div class="brand-wrapper">
+        <img src="icon.png" alt="ScatterID Logo" class="brand-logo-img">
+        <span class="logo-text">ScatterID</span>
+      </div>
+      <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" title="Collapse / Expand Menu">◀</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link active" data-tab="tab-demo"><span class="nav-icon-dot"></span><span class="nav-text">Sandbox</span></a></li>
+      <li><a href="#" class="nav-link" data-tab="tab-overview"><span class="nav-icon-dot"></span><span class="nav-text">Health Status</span></a></li>
+      <li><a href="#" class="nav-link" data-tab="tab-db"><span class="nav-icon-dot"></span><span class="nav-text">Shard Matrix</span></a></li>
+      <li><a href="#" class="nav-link" data-tab="tab-logs"><span class="nav-icon-dot"></span><span class="nav-text">Fabric Logs</span></a></li>
+      <li><a href="#" class="nav-link" data-tab="tab-diagnostics"><span class="nav-icon-dot"></span><span class="nav-text">Diagnostics</span></a></li>
+      <li><a href="#" class="nav-link" data-tab="tab-settings"><span class="nav-icon-dot"></span><span class="nav-text">Settings & Keys</span></a></li>
+      <li><a href="#" class="nav-link" data-tab="tab-architecture"><span class="nav-icon-dot"></span><span class="nav-text">Architecture</span></a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <div class="system-tag">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">ScatterID — Powered by Rynex Security</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Workspace -->
+  <main class="main-content" id="main-content">
+    <div class="glow-bg"></div>
+
+    <!-- Centralized Header -->
+    <header class="top-header">
+      <div class="header-left">
+        <h2 id="page-title">Interactive Sandbox</h2>
+        <p class="subtitle">Post-Quantum Sharded Credential Verification Architecture</p>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-outline" id="refresh-all-btn">Refresh Data</button>
+      </div>
+    </header>
+
+    <div class="content-body">
+      
+      <!-- TAB 1: Interactive Sandbox Demo (TOP DEFAULT TAB) -->
+      <section id="tab-demo" class="tab-pane active">
+        <!-- Prominent View Switch Banner -->
+        <div class="prominent-switch-bar mb-6">
+          <div class="switch-heading">
+            <span class="switch-tag">Interactive Sandbox</span>
+            <span class="switch-sub">Select View Mode:</span>
+          </div>
+          <div class="view-toggle-container prominent">
+            <button class="toggle-btn active" id="btn-view-client-tab" data-view="client">Client Experience Portal</button>
+            <button class="toggle-btn" id="btn-view-telemetry-tab" data-view="telemetry">Deep-Tech Telemetry Matrix</button>
+          </div>
+        </div>
+
+        <!-- Embedded View A: Client Experience -->
+        <div id="demo-tab-client" class="demo-subview active">
+          <div class="grid grid-2">
+            <!-- Card A: Issue New Credential -->
+            <div class="verification-card glass-panel">
+              <div class="card-title-row">
+                <h3>Issue & Anchor New Credential</h3>
+                <span class="status-indicator live"><span class="dot"></span> Gateway Ready</span>
+              </div>
+              <div class="input-form p-4">
+                <div class="input-group mb-3" style="margin-bottom: 15px;">
+                  <label for="issue-subject-input">Subject Identifier (DID)</label>
+                  <input type="text" id="issue-subject-input" class="mono-input w-full" style="width: 100%;" placeholder="e.g. did:scatterid:alice" value="did:scatterid:alice" />
+                </div>
+                <div class="input-group mb-3" style="margin-bottom: 15px;">
+                  <label for="issue-role-input">Designated Role / Claim</label>
+                  <input type="text" id="issue-role-input" class="mono-input w-full" style="width: 100%;" placeholder="e.g. Lead Security Architect" value="Lead Security Architect" />
+                </div>
+                <button class="btn btn-primary w-full" id="tab-btn-run-issue" style="width: 100%;">Generate, Shard & Anchor Proof</button>
+              </div>
+
+              <!-- Issue Result Panel (Hidden until user clicks Issue) -->
+              <div class="result-panel hidden" id="tab-issue-result" style="margin-top: 15px; padding: 15px; border: 1px dashed var(--border-color); border-radius: 4px; background: rgba(255,255,255,0.02);">
+                <div class="badge-status-box valid" style="background: rgba(16, 185, 129, 0.12); color: var(--primary); display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 4px; font-weight: 700; font-size: 0.82rem;">
+                  <span class="status-icon">✓</span>
+                  <span class="status-text">CREDENTIAL SECURELY ISSUED</span>
+                </div>
+                <div class="result-details-grid" style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                  <div class="detail-box col-span-2" style="grid-column: span 2;">
+                    <span class="detail-label" style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Generated Credential ID (UUID v4)</span>
+                    <div class="flex" style="display: flex; gap: 8px; align-items: center;">
+                      <span class="detail-value mono text-purple break-all" id="tab-issue-result-id" style="font-family: var(--font-mono); color: #a855f7; word-break: break-all; font-size: 0.85rem; flex-grow: 1;">--</span>
+                      <button class="btn-copy-sm" id="btn-copy-issued-id" style="flex-shrink: 0;">Copy</button>
+                    </div>
+                  </div>
+                  <div class="detail-box">
+                    <span class="detail-label" style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Shamir Shares</span>
+                    <span class="detail-value mono text-cyan" style="font-family: var(--font-mono); color: #06b6d4; font-size: 0.85rem;">5 Shares Stored</span>
+                  </div>
+                  <div class="detail-box">
+                    <span class="detail-label" style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-bottom: 4px;">PQC Signature</span>
+                    <span class="detail-value mono text-green" style="font-family: var(--font-mono); color: var(--primary); font-size: 0.85rem;">ML-DSA-65 Valid</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card B: Verify Credential Integrity -->
+            <div class="verification-card glass-panel">
+              <div class="card-title-row">
+                <h3>Verify Credential Integrity</h3>
+                <span class="status-indicator live"><span class="dot"></span> Verification Node</span>
+              </div>
+
+              <div class="input-form">
+                <div class="input-group">
+                  <label for="tab-credential-input">Credential Identifier (UUID v4)</label>
+                  <div class="input-wrapper">
+                    <input type="text" id="tab-credential-input" placeholder="e.g. 56298928-58b6-4092-9cc6-b4e29fc1b2d5" autocomplete="off" spellcheck="false" />
+                    <button class="btn btn-primary" id="tab-btn-run-verify">Verify Credential</button>
+                  </div>
+                </div>
+
+                <div class="sample-pills">
+                  <span class="pill-label">Sample Database Records:</span>
+                  <div id="tab-sample-credentials-list">
+                    <span class="sample-pill loading">Loading database records...</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Verification Result Panel (Hidden until user clicks Verify) -->
+              <div class="result-panel hidden" id="tab-verification-result">
+                <div class="result-header">
+                  <div class="badge-status-box valid" id="tab-result-status-badge">
+                    <span class="status-icon">✓</span>
+                    <span class="status-text">CRYPTOGRAPHICALLY VALIDATED</span>
+                  </div>
+                  <span class="timestamp-text" id="tab-result-issued-at">Issued: --</span>
+                </div>
+
+                <div class="result-details-grid">
+                  <div class="detail-box">
+                    <span class="detail-label">Post-Quantum Algorithm</span>
+                    <span class="detail-value mono text-purple" id="tab-result-algo">ML-DSA-65 (FIPS 204)</span>
+                  </div>
+                  <div class="detail-box">
+                    <span class="detail-label">Shamir Secret Threshold</span>
+                    <span class="detail-value mono text-cyan" id="tab-result-shards">k = 3 of n = 5 Shards Validated</span>
+                  </div>
+                  <div class="detail-box">
+                    <span class="detail-label">Hyperledger Fabric Anchor</span>
+                    <span class="detail-value mono text-green" id="tab-result-anchor-status">Active (TxID Anchored)</span>
+                  </div>
+                  <div class="detail-box col-span-2">
+                    <span class="detail-label">Blockchain Anchor Transaction ID</span>
+                    <span class="detail-value mono text-muted break-all" id="tab-result-tx-id">--</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded View B: Deep-Tech Telemetry -->
+        <div id="demo-tab-telemetry" class="demo-subview" style="display: none;">
+          <div class="telemetry-block glass-panel mb-6">
+            <div class="block-header">
+              <div>
+                <h3>5-Node Isolated SQLite Shard Matrix</h3>
+                <p class="block-sub">Physical multi-container database fragmentation (3-of-5 threshold scheme)</p>
+              </div>
+              <button class="btn-refresh-sm" id="tab-btn-refresh-shards">Refresh Matrix</button>
+            </div>
+
+            <div class="shard-grid" id="tab-telemetry-shard-matrix">
+              <div class="shard-card skeleton">Probing 5 isolated container shard nodes...</div>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="telemetry-block glass-panel">
+              <div class="block-header">
+                <h3>ML-DSA-65 Post-Quantum Cryptography</h3>
+                <span class="tag green">NIST FIPS 204 Standard</span>
+              </div>
+              <div class="tech-spec-list">
+                <div class="spec-row"><span class="spec-key">Signature Scheme:</span><span class="spec-val mono">ML-DSA-65 (Dilithium3)</span></div>
+                <div class="spec-row"><span class="spec-key">Security Category:</span><span class="spec-val mono">NIST Level 3 (AES-192 equivalent)</span></div>
+                <div class="spec-row"><span class="spec-key">Public Key Size:</span><span class="spec-val mono">1952 Bytes</span></div>
+                <div class="spec-row"><span class="spec-key">Secret Key Vault Engine:</span><span class="spec-val mono">HashiCorp Vault KV v2 (Port 8200)</span></div>
+              </div>
+            </div>
+
+            <div class="telemetry-block glass-panel">
+              <div class="block-header">
+                <h3>Hyperledger Fabric Ledger Telemetry</h3>
+                <span class="tag green">gRPC Mutual TLS Protocol</span>
+              </div>
+              <div class="tech-spec-list">
+                <div class="spec-row"><span class="spec-key">Channel Name:</span><span class="spec-val mono">scatterid-channel</span></div>
+                <div class="spec-row"><span class="spec-key">Go Chaincode:</span><span class="spec-val mono">scatterproof.go</span></div>
+                <div class="spec-row"><span class="spec-key">Orderer Node:</span><span class="spec-val mono">orderer.scatterid.com:7050 (Raft)</span></div>
+                <div class="spec-row"><span class="spec-key">Peers:</span><span class="spec-val mono">peer0.issuer (7051), peer0.verifier (8051)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: Health Status Overview -->
+      <section id="tab-overview" class="tab-pane">
+        <div class="grid grid-2">
+          <!-- API Services Status -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Core Microservice Endpoints</h3>
+              <span class="badge green">HTTP / TLS Probes</span>
+            </div>
+            <div class="status-list">
+              <div class="status-item">
+                <span class="service-name">Verification API Gateway (Express:3000)</span>
+                <span class="status-badge checking" id="status-api">CHECKING</span>
+              </div>
+              <div class="status-item">
+                <span class="service-name">Crypto Microservice (Flask:5001)</span>
+                <span class="status-badge checking" id="status-crypto">CHECKING</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blockchain Network Status -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Hyperledger Fabric Network Nodes</h3>
+              <span class="badge green">gRPC Probes</span>
+            </div>
+            <div class="status-list">
+              <div class="status-item">
+                <span class="service-name">Orderer Node (orderer.scatterid.com:7050)</span>
+                <span class="status-badge checking" id="status-orderer">CHECKING</span>
+              </div>
+              <div class="status-item">
+                <span class="service-name">Issuer Peer (peer0.issuer.scatterid.com:7051)</span>
+                <span class="status-badge checking" id="status-issuer-peer">CHECKING</span>
+              </div>
+              <div class="status-item">
+                <span class="service-name">Verifier Peer (peer0.verifier.scatterid.com:8051)</span>
+                <span class="status-badge checking" id="status-verifier-peer">CHECKING</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: Shard Matrix & Ledger -->
+      <section id="tab-db" class="tab-pane">
+        <!-- 5-Node Multi-Database Shard Matrix with Embedded Controls -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>5-Node Multi-Database Shard Matrix</h3>
+            <p class="subtitle">Embedded Fault Tolerance Simulator: Click "Simulate Compromise" to take a node container offline and test 3-of-5 threshold resilience.</p>
+          </div>
+          <div class="shard-matrix-grid" id="shard-matrix-cards">
+            <div class="text-center p-3">Scanning 5 isolated node databases...</div>
+          </div>
+        </div>
+
+        <!-- Issued Credentials Table -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Issued Credentials & Blockchain Anchors</h3>
+            <p class="subtitle">Direct visualization of SQLite DB records synchronized with Hyperledger Fabric State</p>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Credential ID</th>
+                  <th>Data Hash (SHA3-256)</th>
+                  <th>PQC Algorithm</th>
+                  <th>Anchor Tx ID</th>
+                  <th>Status</th>
+                  <th>Issued At</th>
+                </tr>
+              </thead>
+              <tbody id="db-table-body">
+                <tr>
+                  <td colspan="6" class="text-center">Loading database records...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: Fabric Logs (Full-Viewport Output Console) -->
+      <section id="tab-logs" class="tab-pane">
+        <div class="card log-card full-viewport">
+          <div class="card-header">
+            <h3>Hyperledger Fabric Peer & Orderer Log Output</h3>
+            <div class="log-controls">
+              <select id="container-log-select">
+                <option value="peer0.issuer.scatterid.com">peer0.issuer.scatterid.com</option>
+                <option value="peer0.verifier.scatterid.com">peer0.verifier.scatterid.com</option>
+                <option value="orderer.scatterid.com">orderer.scatterid.com</option>
+                <option value="scatterid-verification">scatterid-verification</option>
+                <option value="scatterid-crypto">scatterid-crypto</option>
+                <option value="scatterid-vault">scatterid-vault</option>
+                <option value="scatterid-shard-1">scatterid-shard-1</option>
+                <option value="scatterid-shard-2">scatterid-shard-2</option>
+                <option value="scatterid-shard-3">scatterid-shard-3</option>
+                <option value="scatterid-shard-4">scatterid-shard-4</option>
+                <option value="scatterid-shard-5">scatterid-shard-5</option>
+              </select>
+              <button class="btn btn-primary" id="refresh-logs-btn">Fetch Container Logs</button>
+            </div>
+          </div>
+          <div class="log-container">
+            <pre id="log-output">Select a container and click "Fetch Container Logs" to stream output...</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: Diagnostics Console (Full-Viewport Output Console) -->
+      <section id="tab-diagnostics" class="tab-pane">
+        <div class="card full-viewport">
+          <div class="card-header">
+            <h3>End-to-End System Smoke Tester</h3>
+            <button class="btn btn-primary" id="run-diagnostic-btn">Run E2E Smoke Test Suite</button>
+          </div>
+
+          <div class="console-box full-viewport mt-4">
+            <div class="console-header">
+              <span>Diagnostics Terminal Output</span>
+              <span class="cursor">_</span>
+            </div>
+            <div class="console-body" id="diagnostics-console">
+              Click "Run E2E Smoke Test Suite" above to test complete issuance, sharding, anchoring, and verification flow...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: System Architecture (Sub-Options for Infra & Cryptography) -->
+      <section id="tab-architecture" class="tab-pane">
+        <!-- Sub-View Switcher for Architecture -->
+        <div class="prominent-switch-bar mb-6">
+          <div class="view-toggle-container prominent">
+            <button class="toggle-btn active" id="btn-arch-infra" data-arch="infra">Infrastructure Architecture Map</button>
+            <button class="toggle-btn" id="btn-arch-crypto" data-arch="crypto">Cryptographic Security & Boundaries</button>
+          </div>
+        </div>
+
+        <!-- Sub-View A: Infrastructure Architecture Map -->
+        <div id="arch-view-infra" class="arch-subview active">
+          <div class="card">
+            <div class="card-header">
+              <h3>ScatterID Infrastructure Visual Map</h3>
+              <span class="badge green">5 Microservice Micro-Stack</span>
+            </div>
+            
+            <div class="arch-flow-container">
+              <div class="arch-flow-grid">
+                <div class="arch-card">
+                  <span class="badge green">Client Context</span>
+                  <h4>Client SDK</h4>
+                  <p>Initiates credential issuance and verification lifecycle</p>
+                </div>
+
+                <div class="arch-card">
+                  <span class="badge green">Port 3000</span>
+                  <h4>Verification API</h4>
+                  <p>Routes requests, manages 5-node DB shards, anchors proofs</p>
+                </div>
+
+                <div class="arch-card">
+                  <span class="badge green">Port 5001</span>
+                  <h4>Crypto Service</h4>
+                  <p>ML-DSA-65 signatures & Shamir 3-of-5 secret sharing</p>
+                </div>
+
+                <div class="arch-card">
+                  <span class="badge green">Port 8200</span>
+                  <h4>Vault KMS</h4>
+                  <p>Zero-trust post-quantum private key engine</p>
+                </div>
+
+                <div class="arch-card">
+                  <span class="badge green">gRPC</span>
+                  <h4>Fabric Audit Ledger</h4>
+                  <p>Raft Orderer (7050), Peers (7051, 8051), Go Chaincode</p>
+                </div>
+              </div>
+
+              <div class="arch-steps-list">
+                <div class="arch-step-item">
+                  <span class="arch-step-num">1</span>
+                  <span class="arch-step-info"><strong>Client -> Gateway:</strong> <code>POST /issue</code> submits raw claim payload</span>
+                </div>
+                <div class="arch-step-item">
+                  <span class="arch-step-num">2</span>
+                  <span class="arch-step-info"><strong>Gateway -> Crypto Service:</strong> <code>POST /package</code> signs via ML-DSA-65 and splits into 3-of-5 Shamir secret shares.</span>
+                </div>
+                <div class="arch-step-item">
+                  <span class="arch-step-num">3</span>
+                  <span class="arch-step-info"><strong>Gateway -> Shard Matrix:</strong> Distributes share 1..5 across 5 isolated SQLite containers (<code>scatterid-shard-1..5</code>).</span>
+                </div>
+                <div class="arch-step-item">
+                  <span class="arch-step-num">4</span>
+                  <span class="arch-step-info"><strong>Gateway -> Fabric Network:</strong> Submits proof transaction via gRPC to <code>scatterproof</code> chaincode.</span>
+                </div>
+                <div class="arch-step-item">
+                  <span class="arch-step-num">5</span>
+                  <span class="arch-step-info"><strong>Verifier -> Gateway:</strong> <code>POST /verify</code> queries ledger anchor, retrieves >= 3 valid shares, and verifies signature.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-View B: Cryptographic Security & Boundaries -->
+        <div id="arch-view-crypto" class="arch-subview" style="display: none;">
+          <div class="crypto-guarantees-title mb-6">
+            <h3>Cryptographic Security Guarantees & Boundaries</h3>
+            <p>Post-Quantum standard definitions and Zero Trust Architecture (ZTA) security boundaries of the ScatterID engine</p>
+          </div>
+          
+          <div class="grid grid-2">
+            <!-- Card 1: NIST ML-DSA-65 -->
+            <div class="crypto-card card-mldsa">
+              <div class="crypto-card-header">
+                <span class="crypto-number">01</span>
+                <span class="badge green">Post-Quantum Standards</span>
+              </div>
+              <h4 class="crypto-card-title">1. NIST ML-DSA-65 Digital Signatures</h4>
+              <p class="crypto-card-desc">Implements NIST FIPS 204 post-quantum module-lattice-based digital signatures, offering Category 3 security (AES-192 equivalent) resistant to Shor's algorithm quantum attack vectors.</p>
+            </div>
+
+            <!-- Card 2: Shamir Secret Sharing -->
+            <div class="crypto-card card-shamir">
+              <div class="crypto-card-header">
+                <span class="crypto-number">02</span>
+                <span class="badge cyan">Threshold Cryptography</span>
+              </div>
+              <h4 class="crypto-card-title">2. Shamir 3-of-5 Threshold Secret Sharing</h4>
+              <p class="crypto-card-desc">Identity claims are split into 5 polynomial secret shares across independent database containers. Any 3 shares can reconstruct the proof, while 2 or fewer reveal zero mathematical information.</p>
+            </div>
+
+            <!-- Card 3: Zero-Trust Vault KMS -->
+            <div class="crypto-card card-vault">
+              <div class="crypto-card-header">
+                <span class="crypto-number">03</span>
+                <span class="badge purple">Zero-Trust KMS</span>
+              </div>
+              <h4 class="crypto-card-title">3. Zero-Trust Vault KMS Storage</h4>
+              <p class="crypto-card-desc">Post-quantum private keypairs are generated and stored exclusively inside HashiCorp Vault KV v2 engine. Keys are never exposed on disk or environment variables.</p>
+            </div>
+
+            <!-- Card 4: Immutable Ledger Anchoring -->
+            <div class="crypto-card card-fabric">
+              <div class="crypto-card-header">
+                <span class="crypto-number">04</span>
+                <span class="badge gold">Consensus Ledger</span>
+              </div>
+              <h4 class="crypto-card-title">4. Immutable Blockchain Ledger Anchoring</h4>
+              <p class="crypto-card-desc">Credential IDs and SHA3-256 data hashes are immutably committed to Hyperledger Fabric via Raft consensus, establishing an unalterable audit ledger.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: Settings & Keys (Billing, Quotas, API Keys) -->
+      <section id="tab-settings" class="tab-pane">
+        <div class="grid grid-2">
+          <!-- Billing Plan & Quota Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Billing Plan & Quota Telemetry</h3>
+              <span class="badge purple" id="settings-plan-tier">LOADING TIER...</span>
+            </div>
+            <div class="tech-spec-list p-4" style="margin-top: 15px;">
+              <div class="quota-gauge-container mb-4" style="margin-bottom: 20px;">
+                <div class="flex justify-between mb-2" style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                  <span class="spec-key">API Requests Quota:</span>
+                  <span class="spec-val mono" id="settings-quota-text">0 / 0</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" id="settings-quota-progress" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="spec-row" style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);"><span class="spec-key">Billing Cycle Status:</span><span class="spec-val text-green" style="color: var(--primary);">Active (Metered Billing)</span></div>
+              <div class="spec-row" style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color);"><span class="spec-key">Sliding Window Rate Limit:</span><span class="spec-val mono" id="settings-rate-limit-tier">--</span></div>
+              <div class="spec-row" style="display: flex; justify-content: space-between; padding: 10px 0;"><span class="spec-key">Isolated Storage Partition:</span><span class="spec-val mono text-cyan" id="settings-storage-partition" style="color: #06b6d4;">--</span></div>
+            </div>
+          </div>
+
+          <!-- API Key Rotation Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3>API Credentials Management</h3>
+              <button class="btn btn-primary" id="btn-rotate-gateway-key">Rotate API Key</button>
+            </div>
+            <div class="tech-spec-list p-4" style="margin-top: 15px;">
+              <div class="mb-4" style="margin-bottom: 20px;">
+                <label class="spec-key block mb-2" style="display: block; margin-bottom: 8px;">Active API Plaintext Key (Bearer Authorization)</label>
+                <div class="flex" style="display: flex; gap: 10px;">
+                  <input type="text" readonly id="settings-api-key-plaintext" class="mono-input w-full" style="width: 100%; flex-grow: 1;" value="scatterid-test-api-key-999" />
+                  <button class="btn btn-outline ml-2" id="btn-copy-plaintext-key">Copy</button>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <span class="spec-key">Active Hashed Key (SHA-256 in master DB):</span>
+                <span class="spec-val mono text-muted break-all" id="settings-api-key-hashed" style="word-break: break-all; opacity: 0.7; font-size: 0.85rem;">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="mock-api.js"></script>
+  <script src="app.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>
